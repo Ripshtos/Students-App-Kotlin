@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">StudentApp</string>
+    <string name="add_new_student">Add New Student</string>
+    <string name="name">Name</string>
+    <string name="student_id">Student ID</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="plus">+</string>
 </resources>

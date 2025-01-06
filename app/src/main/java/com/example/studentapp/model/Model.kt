@@ -4,6 +4,7 @@ import android.os.Looper
 import androidx.core.os.HandlerCompat
 import com.example.studentapp.base.EmptyCallback
 import com.example.studentapp.base.StudentsCallback
+import com.example.studentapp.base.StudentCallback
 import com.example.studentapp.model.dao.DB
 import com.example.studentapp.model.dao.AppLocalDbRepository
 import java.util.concurrent.Executors
@@ -26,6 +27,18 @@ class Model private constructor() {
 
             mainHandler.post {
                 callback(students)
+            }
+        }
+    }
+
+    fun getStudent(index: String, callback: StudentCallback) {
+        executor.execute {
+            val student = db.studentDao().getStudent(index)
+
+            Thread.sleep(4000)
+
+            mainHandler.post {
+                callback(student)
             }
         }
     }

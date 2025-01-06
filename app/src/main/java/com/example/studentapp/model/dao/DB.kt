@@ -7,20 +7,21 @@ import com.example.studentapp.base.MyApp
 import com.example.studentapp.model.Student
 
 @Database(entities = [Student::class], version = 2)
-abstract class AppLocalDbRepository: RoomDatabase() {
+abstract class AppLocalDbRepository : RoomDatabase() {
     abstract fun studentDao(): StudentDao
 }
 
 object DB {
 
+    // Use lazy so that the DB is built once, on first usage
     val database: AppLocalDbRepository by lazy {
-        // Access the application context using MyApplication.instance
+
         val context = MyApp.instance.applicationContext
 
         Room.databaseBuilder(
-            context = context,
-            klass = AppLocalDbRepository::class.java,
-            name = "dbFileName.db"
+            context,
+            AppLocalDbRepository::class.java,
+            "dbFileName.db"
         )
             .fallbackToDestructiveMigration()
             .build()
