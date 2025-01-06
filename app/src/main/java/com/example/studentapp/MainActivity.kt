@@ -1,8 +1,6 @@
 package com.example.studentapp
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -46,16 +44,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                navController?.popBackStack()
-                true
-            }
-            else -> {
-                navController?.let { NavigationUI.onNavDestinationSelected(item, it) }
-                true
-            }
-        }
-    }
 }

@@ -16,12 +16,12 @@ class StudentListAdapter(
         : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(student: Student) {
-            binding.studentImageView.setImageResource(R.drawable.student_avatar)
-            binding.nameTv.text = student.name
-            binding.idTv.text = student.id
-            binding.checkedCb.isChecked = student.isChecked
+            binding.studentRowImage.setImageResource(R.drawable.student_avatar)
+            binding.studentRowName.text = student.name
+            binding.studentRowId.text = student.id
+            binding.studentRowCheckBox.isChecked = student.isChecked
 
-            binding.checkedCb.setOnCheckedChangeListener { _, isChecked ->
+            binding.studentRowCheckBox.setOnCheckedChangeListener { _, isChecked ->
                 student.isChecked = isChecked
                 // If you want to persist the "isChecked" in DB immediately,
                 // you can call a Model update here, or wait until some other action.

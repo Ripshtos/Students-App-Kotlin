@@ -12,15 +12,20 @@ class NewStudentActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //add binding and inflate it
         binding = NewStudentActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // change the title of the action bar
         supportActionBar?.title = "Add New Student"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        // add a click listener to the save button
         binding.saveBtn.setOnClickListener {
             val name = binding.studentName.text.toString()
             val studentId = binding.studentId.text.toString()
+
 
             if (name.isNotEmpty() && studentId.isNotEmpty()) {
                 val student = Student(name, studentId, isChecked = false , avatarUrl = "@/drawable/student_avatar")
@@ -33,6 +38,7 @@ class NewStudentActivity : AppCompatActivity() {
             }
         }
 
+        // add a click listener to the cancel button
         binding.cancelBtn.setOnClickListener {
             finish()
         }
