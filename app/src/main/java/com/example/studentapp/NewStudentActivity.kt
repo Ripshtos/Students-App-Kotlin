@@ -25,10 +25,11 @@ class NewStudentActivity : AppCompatActivity() {
         binding.saveBtn.setOnClickListener {
             val name = binding.studentName.text.toString()
             val studentId = binding.studentId.text.toString()
-
+            val address = binding.studentAddress.text.toString()
+            val phoneNumber = binding.studentPhone.text.toString()
 
             if (name.isNotEmpty() && studentId.isNotEmpty()) {
-                val student = Student(name, studentId, isChecked = false , avatarUrl = "@/drawable/student_avatar")
+                val student = Student(name, studentId, isChecked = false , avatarUrl = "@/drawable/student_avatar" , address = address , phoneNumber = phoneNumber)
                 Model.shared.add(student) {
                     // callback on main thread
                     finish()
