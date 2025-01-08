@@ -14,7 +14,7 @@ interface StudentDao {
     fun getAllStudent(): List<Student>
 
     @Query("SELECT * FROM Student WHERE id =:id")
-    fun getStudentById(id: String): Student
+    fun getStudent(id: String): Student
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg student: Student)

@@ -5,15 +5,17 @@ import android.app.Application
 class MyApp : Application() {
 
     companion object {
-        lateinit var instance: MyApp
-            private set
+        @Volatile
+        private var _instance: MyApp? = null
+
+        val instance: MyApp
+            get() = _instance ?: throw IllegalStateException(
+                "Application not created yet or has been terminated."
+            )
     }
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
+        _instance = this
     }
 }
-
-// Accessing the application context:
-val appContext = MyApp.instance.applicationContext
