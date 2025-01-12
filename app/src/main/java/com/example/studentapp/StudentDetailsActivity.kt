@@ -1,12 +1,37 @@
 package com.example.studentapp
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.studentapp.databinding.StudentDetailsActivityBinding
 
 class StudentDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: StudentDetailsActivityBinding
+
+    private val editStudentLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        when (result.resultCode) {
+            RESULT_OK -> {
+                result.data?.let {
+                    val updatedName = it.getStringExtra("studentName")
+                    val updatedId = it.getStringExtra("studentId")
+                    val updatedAddress = it.getStringExtra("studentAddress")
+                    val updatedPhone = it.getStringExtra("studentPhone")
+                    val updatedIsChecked = it.getBooleanExtra("isChecked", false)
+
+                    // Update the UI with the new data
+                    binding.studentName.setText(updatedName)
+                    binding.studentId.setText(updatedId)
+                    binding.studentAddress.setText(updatedAddress)
+                    binding.studentPhone.setText(updatedPhone)
+                    binding.isChecked.isChecked = updatedIsChecked
+                }
+            }
+            EditStudentActivity.RESULT_DELETED -> finish()
+        }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +60,13 @@ class StudentDetailsActivity : AppCompatActivity() {
 
         // add a click listener to the edit button
         binding.editBtn.setOnClickListener {
-            // TODO: Implement the edit functionality
+            editStudentLauncher.launch(Intent(this, EditStudentActivity::class.java).apply {
+                putExtra("studentName", name)
+                putExtra("studentId", studentId)
+                putExtra("studentAddress", address)
+                putExtra("studentPhone", phoneNumber)
+                putExtra("isChecked", isChecked)
+            })
         }
     }
 
