@@ -49,6 +49,16 @@ class Model private constructor() {
         }
     }
 
+    fun update(student: Student, callback: EmptyCallback) {
+        executor.execute {
+            db.studentDao().insertAll(student)
+
+            mainHandler.post {
+                callback()
+            }
+        }
+    }
+
     fun delete(student: Student, callback: EmptyCallback) {
         executor.execute {
             db.studentDao().delete(student)

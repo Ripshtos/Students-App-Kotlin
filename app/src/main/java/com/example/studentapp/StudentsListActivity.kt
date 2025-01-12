@@ -28,6 +28,7 @@ class StudentsListActivity : AppCompatActivity() {
                 putExtra("studentId", it.id)
                 putExtra("studentAddress", it.address)
                 putExtra("studentPhone", it.phoneNumber)
+                putExtra("isChecked", it.isChecked)
             })
         }
 
