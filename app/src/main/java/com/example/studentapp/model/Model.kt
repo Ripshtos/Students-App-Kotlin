@@ -23,8 +23,6 @@ class Model private constructor() {
         executor.execute {
             val students = db.studentDao().getAllStudent()
 
-            Thread.sleep(4000)
-
             mainHandler.post {
                 callback(students)
             }
@@ -34,8 +32,6 @@ class Model private constructor() {
     fun getStudent(index: String, callback: StudentCallback) {
         executor.execute {
             val student = db.studentDao().getStudent(index)
-
-            Thread.sleep(4000)
 
             mainHandler.post {
                 callback(student)
@@ -47,8 +43,6 @@ class Model private constructor() {
         executor.execute {
             db.studentDao().insertAll(student)
 
-            Thread.sleep(4000)
-
             mainHandler.post {
                 callback()
             }
@@ -58,8 +52,6 @@ class Model private constructor() {
     fun delete(student: Student, callback: EmptyCallback) {
         executor.execute {
             db.studentDao().delete(student)
-
-            Thread.sleep(4000)
 
             mainHandler.post {
                 callback()
