@@ -22,7 +22,14 @@ class StudentsListActivity : AppCompatActivity() {
         supportActionBar?.title = "Students List"
 
         // Setup RecyclerView
-        adapter = StudentListAdapter(mutableListOf()) {}
+        adapter = StudentListAdapter(mutableListOf()) {
+            startActivity(Intent(this, StudentDetailsActivity::class.java).apply {
+                putExtra("studentName", it.name)
+                putExtra("studentId", it.id)
+                putExtra("studentAddress", it.address)
+                putExtra("studentPhone", it.phoneNumber)
+            })
+        }
 
 
         binding.studentsRecyclerView.layoutManager = LinearLayoutManager(this)

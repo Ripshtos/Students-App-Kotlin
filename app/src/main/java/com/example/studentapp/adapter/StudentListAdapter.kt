@@ -9,7 +9,7 @@ import com.example.studentapp.model.Student
 
 class StudentListAdapter(
     private val data: MutableList<Student>,
-    private val onItemClick: (String) -> Unit
+    private val onItemClick: (Student) -> Unit
 ) : RecyclerView.Adapter<StudentListAdapter.StudentViewHolder>() {
 
     inner class StudentViewHolder(private val binding: StudentListItemBinding)
@@ -28,7 +28,7 @@ class StudentListAdapter(
             }
 
             binding.root.setOnClickListener {
-                onItemClick(student.id)
+                onItemClick(student)
             }
         }
     }
