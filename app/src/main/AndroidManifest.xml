@@ -26,5 +26,7 @@
 
         <!-- New Student Activity -->
         <activity android:name=".NewStudentActivity" />
+
+        <activity android:name=".StudentDetailsActivity" />
     </application>
 </manifest>

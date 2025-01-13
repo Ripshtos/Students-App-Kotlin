@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.studentapp.R
 import com.example.studentapp.databinding.StudentListItemBinding
+import com.example.studentapp.model.Model
 import com.example.studentapp.model.Student
 
 class StudentListAdapter(
     private val data: MutableList<Student>,
-    private val onItemClick: (String) -> Unit
+    private val onItemClick: (Student) -> Unit
 ) : RecyclerView.Adapter<StudentListAdapter.StudentViewHolder>() {
 
     inner class StudentViewHolder(private val binding: StudentListItemBinding)
@@ -23,12 +24,11 @@ class StudentListAdapter(
 
             binding.studentRowCheckBox.setOnCheckedChangeListener { _, isChecked ->
                 student.isChecked = isChecked
-                // If you want to persist the "isChecked" in DB immediately,
-                // you can call a Model update here, or wait until some other action.
+                Model.shared.update(student){}
             }
 
             binding.root.setOnClickListener {
-                onItemClick(student.id)
+                onItemClick(student)
             }
         }
     }
